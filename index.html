@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="data:,">
+<title>helen-足迹</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Serif+SC:wght@400;500;600;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    color-scheme: light dark;
+    --paper:#f6f3ee;
+    --ink:#2c2f33;
+    --ink-soft:#5c6066;
+    --ink-faint:#8a8d90;
+    --line:#d9d2c6;
+    --accent:#a25a4e;      /* 晚霞的赭红 */
+    --accent-2:#3f5a68;    /* 东河的深蓝 */
+    --overlay:rgba(18,20,23,.94);
+    --overlay-ink:#efe9df;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --paper:#16181c;
+      --ink:#e7e2d8;
+      --ink-soft:#b3aea2;
+      --ink-faint:#7e7a70;
+      --line:#33363c;
+      --accent:#cf8a7c;
+      --accent-2:#8fb0bf;
+      --overlay:rgba(8,9,11,.96);
+      --overlay-ink:#efe9df;
+    }
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Noto Serif SC","Songti SC","STSong",serif;
+    font-size:17px;
+    line-height:1.9;
+    -webkit-font-smoothing:antialiased;
+  }
+  .latin{font-family:"Cormorant Garamond","Noto Serif SC",serif}
+
+  /* ---------- 卷首 ---------- */
+  .masthead{
+    max-width:760px;
+    margin:0 auto;
+    padding:88px 24px 0;
+    text-align:center;
+  }
+  .masthead .over{
+    font-size:13px;
+    letter-spacing:.55em;
+    text-indent:.55em;
+    color:var(--ink-faint);
+  }
+  .masthead h1{
+    margin-top:26px;
+    font-size:clamp(44px,9vw,68px);
+    font-weight:900;
+    letter-spacing:.14em;
+    line-height:1.25;
+  }
+  .masthead h1 .sep{
+    color:var(--accent);
+    font-weight:400;
+    margin:0 .08em;
+  }
+  .masthead .tagline{
+    margin-top:22px;
+    font-size:16px;
+    color:var(--ink-soft);
+    letter-spacing:.22em;
+  }
+  .masthead .rule{
+    width:56px;height:1px;
+    background:var(--accent);
+    margin:40px auto 0;
+    border:0;
+  }
+  .index{
+    max-width:760px;
+    margin:44px auto 0;
+    padding:0 24px;
+    display:flex;
+    justify-content:center;
+    gap:14px;
+    flex-wrap:wrap;
+    font-size:14px;
+    letter-spacing:.18em;
+  }
+  .index a{
+    color:var(--ink-soft);
+    text-decoration:none;
+    border:1px solid var(--line);
+    padding:8px 20px 7px;
+    border-radius:999px;
+    transition:color .25s,border-color .25s;
+  }
+  .index a:hover{color:var(--accent);border-color:var(--accent)}
+
+  /* ---------- 游记 ---------- */
+  main{max-width:1080px;margin:0 auto;padding:0 24px}
+  .journey{padding:110px 0 30px}
+  .journey-head{max-width:680px;margin:0 auto;text-align:center}
+  .journey-head .meta{
+    font-size:13.5px;
+    letter-spacing:.42em;
+    text-indent:.42em;
+    color:var(--accent-2);
+  }
+  .journey-head .meta .latin{letter-spacing:.3em}
+  .journey-head h2{
+    margin-top:18px;
+    font-size:clamp(34px,6vw,46px);
+    font-weight:900;
+    letter-spacing:.2em;
+    text-indent:.2em;
+  }
+  .journey-head .en{
+    margin-top:10px;
+    font-size:19px;
+    font-style:italic;
+    letter-spacing:.24em;
+    color:var(--ink-faint);
+  }
+  .essay{
+    max-width:640px;
+    margin:52px auto 0;
+    text-align:justify;
+    font-size:17.5px;
+    line-height:2.15;
+    color:var(--ink);
+  }
+  .essay p + p{margin-top:1.4em}
+  .essay p:first-child::first-letter{
+    font-size:2.5em;
+    font-weight:900;
+    color:var(--accent);
+    float:left;
+    line-height:1.12;
+    padding-right:.14em;
+  }
+  .essay .closing{
+    text-align:center;
+    font-size:15px;
+    letter-spacing:.3em;
+    color:var(--ink-faint);
+    margin-top:2.2em;
+  }
+
+  /* ---------- 照片 ---------- */
+  .photos{margin-top:84px}
+  figure{margin:0 auto 96px;max-width:960px}
+  figure.wide{max-width:1080px}
+  figure.narrow{max-width:760px}
+  figure button{
+    display:block;width:100%;
+    border:0;padding:0;background:none;cursor:zoom-in;
+  }
+  figure img{
+    display:block;width:100%;height:auto;
+    box-shadow:0 18px 50px rgba(30,32,36,.16);
+  }
+  @media (prefers-color-scheme: dark){
+    figure img{box-shadow:0 18px 50px rgba(0,0,0,.55)}
+  }
+  figcaption{
+    margin-top:20px;
+    display:flex;
+    align-items:baseline;
+    gap:16px;
+    justify-content:center;
+    text-align:center;
+    flex-wrap:wrap;
+  }
+  figcaption .no{
+    font-family:"Cormorant Garamond",serif;
+    font-style:italic;
+    font-size:19px;
+    color:var(--accent);
+    letter-spacing:.08em;
+  }
+  figcaption .cap{
+    font-size:15px;
+    letter-spacing:.16em;
+    color:var(--ink-soft);
+  }
+
+  /* ---------- 卷尾 ---------- */
+  footer{
+    max-width:760px;
+    margin:20px auto 0;
+    padding:0 24px 84px;
+    text-align:center;
+  }
+  footer .rule{width:56px;height:1px;background:var(--line);border:0;margin:0 auto 34px}
+  footer .end{
+    font-size:14px;
+    letter-spacing:.34em;
+    text-indent:.34em;
+    color:var(--ink-faint);
+  }
+  footer .sign{
+    margin-top:14px;
+    font-size:19px;
+    font-style:italic;
+    color:var(--ink-soft);
+  }
+
+  /* ---------- 灯箱 ---------- */
+  .lightbox{
+    position:fixed;inset:0;
+    background:var(--overlay);
+    display:none;
+    flex-direction:column;
+    z-index:50;
+  }
+  .lightbox.open{display:flex}
+  .lb-stage{
+    flex:1;display:flex;align-items:center;justify-content:center;
+    padding:64px 20px 8px;min-height:0;
+  }
+  .lb-stage img{
+    max-width:min(1100px,94vw);
+    max-height:100%;
+    object-fit:contain;
+    box-shadow:0 24px 70px rgba(0,0,0,.5);
+  }
+  .lb-cap{
+    text-align:center;
+    color:var(--overlay-ink);
+    font-size:15px;
+    letter-spacing:.2em;
+    padding:14px 20px 4px;
+  }
+  .lb-count{
+    text-align:center;
+    color:rgba(239,233,223,.55);
+    font-size:14px;
+    padding-bottom:22px;
+  }
+  .lb-btn{
+    position:absolute;
+    background:none;border:0;cursor:pointer;
+    color:var(--overlay-ink);
+    font-family:"Cormorant Garamond",serif;
+    line-height:1;
+    opacity:.75;transition:opacity .2s;
+    padding:14px;
+    z-index:2;
+  }
+  .lb-btn:hover{opacity:1}
+  .lb-close{top:10px;right:14px;font-size:40px}
+  .lb-prev,.lb-next{top:50%;transform:translateY(-50%);font-size:56px}
+  .lb-prev{left:6px}
+  .lb-next{right:6px}
+  @media (max-width:720px){
+    .lb-prev,.lb-next{font-size:42px;padding:10px}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto}
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <p class="over">旅 行 手 记</p>
+  <h1>helen<span class="sep">-</span>足迹</h1>
+  <p class="tagline">走过的路，看过的水，都在这里留一个印记</p>
+  <hr class="rule">
+  <nav class="index" aria-label="足迹索引">
+    <a href="#new-york-waterfront">纽约 · 水岸 — 2026.10</a>
+  </nav>
+</header>
+
+<main>
+  <!-- 纽约 · 水岸 -->
+  <article class="journey" id="new-york-waterfront">
+    <div class="journey-head">
+      <p class="meta"><span class="latin">2026 · OCT</span>　美国 · 纽约</p>
+      <h2>纽约 · 水岸</h2>
+      <p class="en latin">New York, from the Water</p>
+    </div>
+
+    <div class="essay">
+      <p>十月的纽约，最好的角度在水上。站在东河边看曼哈顿——那座城市离得那么近，又好像与我无关，只是一幅缓缓展开的长卷。</p>
+      <p>日落时分，云被烧成粉紫色，楼群一层层沉下去，沉成剪影；有风的白天，天蓝得坦荡，布鲁克林大桥横跨江面，渡轮来来去去，把水面犁出一道道白痕。站在码头上，木桩黑着脸，什么也不说，只是陪你一起看对岸的灯火次第亮起来。</p>
+      <p>这座城市从不温柔。可是站在水边看它的时候，它很美。</p>
+      <p class="closing">— 二〇二六年十月，于东河边 —</p>
+    </div>
+
+    <div class="photos">
+      <figure class="wide">
+        <button type="button" data-full="assets/ny-01.jpg" data-cap="黄昏 · 云被烧成粉紫色，楼群沉成剪影" aria-label="放大查看：黄昏的曼哈顿天际线">
+          <img src="assets/ny-01.jpg" alt="日落时分的曼哈顿天际线，粉紫色云霞下楼群成剪影，前景是东河水面" loading="eager">
+        </button>
+        <figcaption><span class="no latin">No. 1</span><span class="cap">黄昏 · 云被烧成粉紫色，楼群沉成剪影</span></figcaption>
+      </figure>
+
+      <figure>
+        <button type="button" data-full="assets/ny-02.jpg" data-cap="白昼 · 蓝天之下，天际线坦坦荡荡" aria-label="放大查看：白天的曼哈顿上城天际线">
+          <img src="assets/ny-02.jpg" alt="白天的曼哈顿上城天际线，蓝天白云，深蓝色河水" loading="lazy">
+        </button>
+        <figcaption><span class="no latin">No. 2</span><span class="cap">白昼 · 蓝天之下，天际线坦坦荡荡</span></figcaption>
+      </figure>
+
+      <figure class="wide">
+        <button type="button" data-full="assets/ny-03.jpg" data-cap="布鲁克林大桥 · 渡轮来来去去" aria-label="放大查看：布鲁克林大桥与江面渡轮">
+          <img src="assets/ny-03.jpg" alt="布鲁克林大桥横跨东河，江面上有渡轮驶过，桥塔上飘着旗帜" loading="lazy">
+        </button>
+        <figcaption><span class="no latin">No. 3</span><span class="cap">布鲁克林大桥 · 渡轮来来去去</span></figcaption>
+      </figure>
+
+      <figure class="narrow">
+        <button type="button" data-full="assets/ny-04.jpg" data-cap="码头 · 木桩不说话，陪你看对岸" aria-label="放大查看：码头木桩远眺对岸">
+          <img src="assets/ny-04.jpg" alt="码头木桩立在河边，远眺对岸的楼群与游艇码头" loading="lazy">
+        </button>
+        <figcaption><span class="no latin">No. 4</span><span class="cap">码头 · 木桩不说话，陪你看对岸</span></figcaption>
+      </figure>
+    </div>
+  </article>
+</main>
+
+<footer>
+  <hr class="rule">
+  <p class="end">未 完 待 续</p>
+  <p class="sign latin">— helen —</p>
+</footer>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="照片查看">
+  <button class="lb-btn lb-close" id="lbClose" aria-label="关闭">×</button>
+  <button class="lb-btn lb-prev" id="lbPrev" aria-label="上一张">‹</button>
+  <button class="lb-btn lb-next" id="lbNext" aria-label="下一张">›</button>
+  <div class="lb-stage"><img id="lbImg" alt=""></div>
+  <p class="lb-cap" id="lbCap"></p>
+  <p class="lb-count latin" id="lbCount"></p>
+</div>
+
+<script>
+  // 灯箱：点开任意照片大图查看，可前后翻页
+  var photos = Array.prototype.slice.call(document.querySelectorAll('figure button[data-full]'));
+  var lb = document.getElementById('lightbox');
+  var lbImg = document.getElementById('lbImg');
+  var lbCap = document.getElementById('lbCap');
+  var lbCount = document.getElementById('lbCount');
+  var current = 0;
+
+  function show(i){
+    current = (i + photos.length) % photos.length;
+    var btn = photos[current];
+    var img = btn.querySelector('img');
+    lbImg.src = btn.getAttribute('data-full');
+    lbImg.alt = img ? img.alt : '';
+    lbCap.textContent = btn.getAttribute('data-cap') || '';
+    lbCount.textContent = (current + 1) + ' / ' + photos.length;
+  }
+  function openLb(i){
+    show(i);
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLb(){
+    lb.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  photos.forEach(function(btn, i){
+    btn.addEventListener('click', function(){ openLb(i); });
+  });
+  document.getElementById('lbClose').addEventListener('click', closeLb);
+  document.getElementById('lbPrev').addEventListener('click', function(e){ e.stopPropagation(); show(current - 1); });
+  document.getElementById('lbNext').addEventListener('click', function(e){ e.stopPropagation(); show(current + 1); });
+  lb.addEventListener('click', function(e){ if (e.target === lb || e.target.classList.contains('lb-stage')) closeLb(); });
+  document.addEventListener('keydown', function(e){
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape') closeLb();
+    if (e.key === 'ArrowLeft') show(current - 1);
+    if (e.key === 'ArrowRight') show(current + 1);
+  });
+</script>
+</body>
+</html>

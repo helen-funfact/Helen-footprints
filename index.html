@@ -108,11 +108,11 @@
   /* ---------- 游记 ---------- */
   main{max-width:1080px;margin:0 auto;padding:0 24px}
   .journey{scroll-margin-top:18px;padding:110px 0 30px}
-  .journey-head{max-width:680px;margin:0 auto;text-align:center}
+  .journey-head{max-width:640px;margin:0 auto;text-align:left}
   .journey-head .meta{
     font-size:13.5px;
     letter-spacing:.42em;
-    text-indent:.42em;
+    text-indent:0;
     color:var(--accent-2);
   }
   .journey-head .meta .latin{letter-spacing:.3em}
@@ -121,8 +121,10 @@
     font-size:clamp(34px,6vw,46px);
     font-weight:900;
     letter-spacing:.2em;
-    text-indent:.2em;
+    text-indent:0;
   }
+  .journey-head .meta-en{text-align:left;text-indent:0}
+  .journey-head .en{text-indent:0}
   .journey-head .en{
     margin-top:10px;
     font-size:19px;
